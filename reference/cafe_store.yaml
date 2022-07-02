@@ -1,0 +1,350 @@
+openapi: 3.0.0
+x-stoplight:
+  id: 5698262163a69
+info:
+  title: cafe_store_api
+  version: '1.0'
+  description: this is a sample.
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  /menu:
+    parameters: []
+    get:
+      summary: list menu
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                x-examples:
+                  example-1:
+                    - id: 1
+                      name: coffee
+                      price: 350
+                      status: available
+                    - id: 2
+                      name: latte
+                      price: 400
+                      status: sold out
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    price:
+                      type: integer
+                    status:
+                      type: string
+              examples:
+                list menu example:
+                  value:
+                    - id: 1
+                      name: coffee
+                      price: 350
+                      status: available
+                    - id: 2
+                      name: latte
+                      price: 400
+                      status: sold out
+        '400':
+          description: Bad Request
+      operationId: getMenu
+      description: メニュー一覧
+      x-internal: false
+      parameters: []
+    post:
+      summary: add menu
+      operationId: addMenu
+      responses:
+        '201':
+          $ref: '#/components/responses/menu_res'
+        '400':
+          description: Bad Request
+      description: メニュー作成
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              x-examples:
+                example-1:
+                  name: coffee
+                  price: 350
+                  status: available
+              properties:
+                name:
+                  type: string
+                price:
+                  type: integer
+                status:
+                  type: string
+                  default: available
+                  enum:
+                    - available
+                    - sold out
+              required:
+                - name
+                - price
+            examples:
+              add menu example:
+                value:
+                  name: coffee
+                  price: 350
+                  status: available
+        description: ''
+  '/menu/{menuID}':
+    parameters:
+      - schema:
+          type: string
+        name: menuID
+        in: path
+        required: true
+        description: メニューID
+    get:
+      summary: show menu
+      responses:
+        '200':
+          $ref: '#/components/responses/menu_res'
+        '400':
+          description: Bad Request
+      operationId: showMenu
+      description: メニュー詳細
+      x-internal: false
+      parameters: []
+    put:
+      summary: update menu
+      operationId: updateMenu
+      responses:
+        '200':
+          $ref: '#/components/responses/menu_res'
+        '400':
+          description: Bad Request
+      description: メニュー更新
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              x-examples:
+                example-1:
+                  name: coffee
+                  price: 350
+                  status: available
+              properties:
+                name:
+                  type: string
+                price:
+                  type: integer
+                status:
+                  type: string
+                  enum:
+                    - available
+                    - sold out
+            examples:
+              update menu example:
+                value:
+                  name: coffee
+                  price: 350
+                  status: available
+        description: ''
+    delete:
+      summary: delete menu
+      operationId: DeleteMenu
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+      description: メニュー削除
+  /order:
+    get:
+      summary: list order
+      operationId: listOrder
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                x-examples:
+                  example-1:
+                    - id: 101
+                      menuId: 1
+                      quantity: 2
+                      shipDate: '2022-07-01T09:24:39.449Z'
+                    - id: 101
+                      menuId: 1
+                      quantity: 1
+                      shipDate: '2022-07-02T17:04:19.719Z'
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    menuId:
+                      type: integer
+                    quantity:
+                      type: integer
+                    shipDate:
+                      type: string
+                      format: date-time
+              examples:
+                list order example:
+                  value:
+                    - id: 101
+                      menuId: 1
+                      quantity: 2
+                      shipDate: '2022-07-01T09:24:39.449Z'
+                    - id: 101
+                      menuId: 1
+                      quantity: 1
+                      shipDate: '2022-07-02T17:04:19.719Z'
+        '400':
+          description: Bad Request
+      description: オーダー一覧
+    parameters: []
+    post:
+      summary: add order
+      operationId: addOrder
+      responses:
+        '201':
+          $ref: '#/components/responses/order_res'
+        '400':
+          description: Bad Request
+      description: オーダー作成
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              x-examples:
+                example-1:
+                  menuId: 1
+                  quantity: 2
+              properties:
+                menuId:
+                  type: integer
+                quantity:
+                  type: integer
+              required:
+                - menuId
+                - quantity
+            examples:
+              add order example:
+                value:
+                  menuId: 1
+                  quantity: 2
+  '/order/{orderID}':
+    parameters:
+      - schema:
+          type: string
+        name: orderID
+        in: path
+        required: true
+        description: オーダーID
+    get:
+      summary: show order
+      responses:
+        '200':
+          $ref: '#/components/responses/order_res'
+        '400':
+          description: Bad Request
+      operationId: showOrder
+      description: オーダー詳細
+    put:
+      summary: ''
+      operationId: updateOrder
+      responses:
+        '200':
+          $ref: '#/components/responses/order_res'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                quantity:
+                  type: integer
+              x-examples:
+                example-1:
+                  quantity: 2
+            examples:
+              update order example:
+                value:
+                  quantity: 2
+        description: ''
+      description: オーダー更新
+    delete:
+      summary: ''
+      operationId: deleteOrder
+      responses:
+        '204':
+          description: No Content
+      description: オーダー削除
+components:
+  schemas: {}
+  securitySchemes: {}
+  responses:
+    menu_res:
+      description: menu response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+              price:
+                type: integer
+              status:
+                type: string
+            x-examples:
+              example-1:
+                id: 1
+                name: coffee
+                price: 350
+                status: available
+          examples:
+            example coffee:
+              value:
+                id: 1
+                name: coffee
+                price: 350
+                status: available
+    order_res:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            x-examples:
+              example-1:
+                id: 101
+                menuId: 1
+                quantity: 2
+                shipDate: '2022-07-02T17:04:19.719Z'
+            properties:
+              id:
+                type: integer
+              menuId:
+                type: integer
+              quantity:
+                type: integer
+              shipDate:
+                type: string
+                format: date-time
+          examples:
+            order res example:
+              value:
+                id: 101
+                menuId: 1
+                quantity: 2
+                shipDate: '2022-07-02T17:04:19.719Z'
