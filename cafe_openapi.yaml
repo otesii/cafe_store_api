@@ -1,0 +1,488 @@
+swagger: "2.0"
+info:
+  description: "This is a sample server cafe server."
+  version: "1.0.0"
+  title: "cafe store api"
+host: "localhost"
+basePath: "/v1"
+tags:
+- name: "menu"
+  description: "Everything about your Menu"
+- name: "store"
+  description: "Access to cafe store orders"
+- name: "user"
+  description: "Operations about user"
+schemes:
+- "http"
+paths:
+  /menu:
+    post:
+      tags:
+      - "menu"
+      summary: "add a new menu"
+      description: "メニューを登録"
+      operationId: "addMenu"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/CreateMenu"
+      responses:
+        "400":
+          description: "Validation exception"
+      security:
+      - token: []
+    put:
+      tags:
+      - "menu"
+      summary: "update menu"
+      description: "メニューの内容を更新"
+      operationId: "updateMenu"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "menu object that needs to be added to the store"
+        required: true
+        schema:
+          $ref: "#/definitions/Menu"
+      responses:
+        "400":
+          description: "Validation exception"
+        "404":
+          description: "Pet not found"
+      security:
+      - token: []
+    get:
+      tags:
+      - "menu"
+      summary: "menu list"
+      description: "メニューの一覧を取得"
+      operationId: "listMenu"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        "400":
+          description: "Validation exception"
+      security:
+      - token: []
+  /menu/{menuID}:
+    get:
+      tags:
+      - "menu"
+      summary: "show menu by ID"
+      description: "メニューの詳細を取得"
+      operationId: "showMenu"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "menuId"
+        in: "path"
+        description: "メニューID"
+        required: true
+        type: "integer"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Menu"
+        "400":
+          description: "Validation exception"
+        "404":
+          description: "Pet not found"
+      security:
+      - token: []
+    delete:
+      tags:
+      - "menu"
+      summary: "delete menu by ID"
+      description: "メニューを削除"
+      operationId: "deleteMenu"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "menuId"
+        in: "path"
+        description: "メニューID"
+        required: true
+        type: "integer"
+      responses:
+        "400":
+          description: "Validation exception"
+        "404":
+          description: "Menu not found"
+      security:
+      - token: []
+  /store/order:
+    post:
+      tags:
+      - "store"
+      summary: "order the menu"
+      description: "メニューの注文"
+      operationId: "addOrder"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "order placed for purchasing the menu"
+        required: true
+        schema:
+          $ref: "#/definitions/CreateOrder"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Order"
+        "400":
+          description: "Invalid Order"
+      security:
+      - token: []
+    get:
+      tags:
+      - "store"
+      summary: "order list"
+      description: "オーダー一覧"
+      operationId: "listOrder"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        "400":
+          description: "Validation exception"
+      security:
+      - token: []
+  /store/order/{orderId}:
+    get:
+      tags:
+      - "store"
+      summary: "show order by ID"
+      description: "注文の詳細を取得"
+      operationId: "showOrder"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "orderId"
+        in: "path"
+        description: "オーダーID"
+        required: true
+        type: "integer"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Order"
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Order not found"
+      security:
+      - token: []
+    delete:
+      tags:
+      - "store"
+      summary: "delet order by ID"
+      description: "注文を削除"
+      operationId: "deleteOrder"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "orderId"
+        in: "path"
+        description: "オーダーID"
+        required: true
+        type: "integer"
+      responses:
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Order not found"
+      security:
+      - token: []
+  /user:
+    post:
+      tags:
+      - "user"
+      summary: "create user"
+      description: "ユーザ作成"
+      operationId: "addUser"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Created user object"
+        required: true
+        schema:
+          $ref: "#/definitions/CreateUser"
+      responses:
+        default:
+          description: "successful operation"
+    get:
+      tags:
+      - "user"
+      summary: "user list"
+      description: "ユーザ一覧"
+      operationId: "listUser"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        "400":
+          description: "Validation exception"
+      security:
+      - token: []
+  /user/{username}:
+    get:
+      tags:
+      - "user"
+      summary: "show user"
+      description: "ユーザ詳細取得"
+      operationId: "showUser"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/User"
+        "400":
+          description: "Invalid username supplied"
+        "404":
+          description: "User not found"
+      security:
+      - token: []
+    put:
+      tags:
+      - "user"
+      summary: "update user"
+      operationId: "updateUser"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "path"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "Update user object"
+        required: true
+        schema:
+          $ref: "#/definitions/User"
+      responses:
+        "400":
+          description: "Invalid user supplied"
+        "404":
+          description: "User not found"
+      security:
+      - token: []
+    delete:
+      tags:
+      - "user"
+      summary: "delete user"
+      description: "ユーザ削除"
+      operationId: "deleteUser"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "path"
+        description: "The name that needs to be deleted"
+        required: true
+        type: "string"
+      responses:
+        "400":
+          description: "Invalid username supplied"
+        "404":
+          description: "User not found"
+      security:
+      - token: []
+  /user/login:
+    get:
+      tags:
+      - "user"
+      summary: "Logs user into the system"
+      description: "ユーザログイン"
+      operationId: "loginUser"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "query"
+        description: "The user name for login"
+        required: true
+        type: "string"
+      - name: "password"
+        in: "query"
+        description: "The password for login in clear text"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "string"
+          headers:
+            X-Rate-Limit:
+              type: "integer"
+              format: "int32"
+              description: "calls per hour allowed by the user"
+            X-Expires-After:
+              type: "string"
+              format: "date-time"
+              description: "date in UTC when token expires"
+        "400":
+          description: "Invalid username/password supplied"
+  /user/logout:
+    get:
+      tags:
+      - "user"
+      summary: "Logs out current logged in user session"
+      description: "ユーザログアウト"
+      operationId: "logoutUser"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        default:
+          description: "successful operation"
+      security:
+      - token: []
+securityDefinitions:
+  token:
+    type: "apiKey"
+    name: "token"
+    in: "header"
+definitions:
+  CreateOrder:
+    type: "object"
+    properties:
+      menuId:
+        type: "integer"
+        example: 1
+      quantity:
+        type: "integer"
+        example: 2
+  Order:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        example: 101
+      menuId:
+        type: "integer"
+        example: 1
+      quantity:
+        type: "integer"
+        example: 2
+      shipDate:
+        type: "string"
+        format: "date-time"
+  Category:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        example: "1"
+      name:
+        type: "string"
+        example: "drink"
+  CreateUser:
+    required:
+      - "username"
+      - "password"
+    type: "object"
+    properties:
+      username:
+        type: "string"
+        example: "otesii"
+      password:
+        type: "string"
+        example: "******"
+      enabled:
+        type: "boolean"
+        example: 1
+  User:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        example: 1001
+      username:
+        type: "string"
+        example: "otesii"
+      password:
+        type: "string"
+        example: "******"
+      enabled:
+        type: "boolean"
+        example: 1
+  CreateMenu:
+    type: "object"
+    required:
+    - "name"
+    - "price"
+    properties:
+      name:
+        type: "string"
+        example: "coffee"
+      price:
+        type: "integer"
+        example: 350
+      status:
+        type: "string"
+        description: "menu status in the store"
+        enum:
+        - "available"
+        - "sold out"
+  Menu:
+    type: "object"
+    required:
+    - "name"
+    properties:
+      id:
+        type: "integer"
+        example: 1
+      name:
+        type: "string"
+        example: "coffee"
+      price:
+        type: "integer"
+        example: 350
+      status:
+        type: "string"
+        description: "menu status in the store"
+        enum:
+        - "available"
+        - "sold out"
+  ApiResponse:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      type:
+        type: "string"
+      message:
+        type: "string"
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
