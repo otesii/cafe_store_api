@@ -7,11 +7,14 @@ https://otesii.github.io/cafe_store_api/openapi/dist/index.html
 ## Features
 
 ## Requirement
-- ubuntu    20.04
-- php       8.1.7
-- openapi   3.0.0
-- slim/slim 4.10.0 
-- slim/psr  7 1.5  
+| name      | version |
+| --------- | ------- |
+| ubuntu    | 20.04   |
+| php       | 8.1.7   |
+| composer  | 2.3.9   |
+| openapi   | 3.0.0   |
+| slim/slim | 4.10.0  |
+| slim/psr7 | 1.5     |
 
 ## Installation
 ```
