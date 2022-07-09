@@ -1,7 +1,7 @@
 # cafe store api
 ## 🍫Description
 [cafe store apiドキュメント](https://otesii.github.io/cafe_store_api/openapi/dist/index.html)  
-openapi, slim4, gitlabCI, argoCDを触って見るためにAPIを構築
+openapi, slim4, gitlabCI, argoCDを触ってみるためにAPIを構築
 
 ## 🎏Features
 
