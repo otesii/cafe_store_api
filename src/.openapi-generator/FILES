@@ -1,6 +1,5 @@
 .github/workflows/main.yml
 .gitignore
-.openapi-generator-ignore
 README.md
 composer.json
 config/.htaccess
@@ -26,14 +25,4 @@ phpcs.xml.dist
 phpunit.xml.dist
 public/.htaccess
 public/index.php
-tests/Api/MenuApiTest.php
-tests/Api/OrderApiTest.php
 tests/BaseModelTest.php
-tests/Model/AddMenu201ResponseTest.php
-tests/Model/AddMenuRequestTest.php
-tests/Model/AddOrder201ResponseTest.php
-tests/Model/AddOrderRequestTest.php
-tests/Model/GetMenu200ResponseInnerTest.php
-tests/Model/ListOrder200ResponseInnerTest.php
-tests/Model/UpdateMenuRequestTest.php
-tests/Model/UpdateOrderRequestTest.php
