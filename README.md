@@ -11,7 +11,7 @@ https://otesii.github.io/cafe_store_api/openapi/dist/index.html
 - php       8.1.7
 - openapi   3.0.0
 - slim/slim 4.10.0 
-- slim/psr7 1.5  
+- slim/psr  7 1.5  
 
 ## Installation
 ```
