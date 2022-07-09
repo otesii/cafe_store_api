@@ -1,12 +1,11 @@
 # cafe store api
-## Description
-いろいろな学習用にAPIを実装
+## 🍫Description
+[cafe store apiドキュメント](https://otesii.github.io/cafe_store_api/openapi/dist/index.html)  
+openapi, slim4, gitlabCI, argoCDを触って見るためにAPIを構築
 
-https://otesii.github.io/cafe_store_api/openapi/dist/index.html
+## 🎏Features
 
-## Features
-
-## Requirement
+## 🚲Requirement
 | name      | version |
 | --------- | ------- |
 | ubuntu    | 20.04   |
@@ -16,7 +15,7 @@ https://otesii.github.io/cafe_store_api/openapi/dist/index.html
 | slim/slim | 4.10.0  |
 | slim/psr7 | 1.5     |
 
-## Installation
+## 🚀Installation
 ```
 $ GENERATOR=php-slim4
 $ docker run --rm -v ${PWD}:/local openapitools/openapi-generator-cli generate -i /local/openapi/cafe_store_api/openapi.yaml -g ${GENERATOR} -o /local/src
@@ -25,7 +24,7 @@ $ sudo apt install php8.1-xml
 $ composer install
 ```
 
-## Usage
+## ☕Usage
 
-## Author
+## 🧜‍♂️Author
 otesii
